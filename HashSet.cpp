@@ -37,9 +37,11 @@ void HashSet::insert(const std::string& value){
     int v = (*strfn).hash(value); 
     int id = (*intfn).hash(v); 
     while(slots[id] != NULL){
-        id ++; 
+        id = (id + 1)% nslots; 
     }
-    *slots[id] = value; //insertion completed
+    string* temp = new string(value);  
+    slots[id] = temp; //insertion completed
+    delete temp; 
     nitems ++; 
 }
 
@@ -47,15 +49,16 @@ bool HashSet::lookup(const std::string& value)const{
     int v = (*strfn).hash(value); 
     int id =(*intfn).hash(v); 
     while(slots[id] != NULL && id < nslots){
-        if(*slots[id] == value)
-            return true; 
+	if(*slots[id] == value)
+            return true;
+	id ++; //linear prob 
     }
     return false; //not found
 }
 
 HashSet::~HashSet(){
     delete strfn; 
-    delete strfn2;
+//    delete strfn2;
     delete intfn; 
     delete[] slots; 
 }

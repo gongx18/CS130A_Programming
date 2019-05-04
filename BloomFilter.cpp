@@ -3,11 +3,15 @@
 #include "IntegerHashes.h"
 #include "StringHashes.h"
 #include "BloomFilter.h"
+#include <iostream>
+using namespace std; 
 
-BloomFilter::BloomFilter(int k, int m, std::string intfn, std::string strfn){
+BloomFilter::BloomFilter(int k, int m, std::string strfn, std::string intfn){
 	this->k = k; //k = # hashfunctions
 	this->m = m; //m = # bits
 	intfns = new IntegerHash*[k]; 
+	cout<<"Int hash is: "+ intfn<<endl;
+	cout << "String hash is" + strfn <<endl; 
 	bits = new uint64_t[(int)m/4 + 3]; //how to determine the size of bit array;
 	if(strfn == "jenkins"){
 		this->strfn = new JenkinsHash(); //wrong
