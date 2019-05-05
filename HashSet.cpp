@@ -2,6 +2,7 @@
 #include "IntegerHashes.h"
 #include "StringHashes.h"
 #include <string>
+#include <iostream>
 using namespace std;
 HashSet::HashSet(){
     nitems = 0;
@@ -31,7 +32,7 @@ void HashSet::rehash(){
 }
 
 void HashSet::insert(const std::string& value){
-    //rehash if oversize; 
+    //rehash if oversize;  
     if(nitems == nslots) rehash(); 
 
     int v = (*strfn).hash(value); 
@@ -41,6 +42,7 @@ void HashSet::insert(const std::string& value){
     }
     string* temp = new string(value);  
     slots[id] = temp; //insertion completed
+    //cout << *slots[id] << endl; 
     delete temp; 
     nitems ++; 
 }
@@ -57,6 +59,10 @@ bool HashSet::lookup(const std::string& value)const{
 }
 
 HashSet::~HashSet(){
+//    for(int i = 0; i < nslots; i++){
+//	if(slots[i] != NULL)
+//		cout<<*slots[i]<<endl;
+//    }
     delete strfn; 
 //    delete strfn2;
     delete intfn; 
