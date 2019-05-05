@@ -6,7 +6,7 @@
 using namespace std;
 HashSet::HashSet(){
     nitems = 0;
-    nslots = 10000; 
+    nslots = 100; 
     strfn = new PearsonHash(); 
     intfn = new ReciprocalHash(1, nslots);
     slots = new string*[nslots];
@@ -48,15 +48,13 @@ void HashSet::insert(const std::string& value){
 
 bool HashSet::lookup(const std::string& value)const{
     int v = (*strfn).hash(value); 
-    int id =(*intfn).hash(v);  
-    int count = 0; 
+    int id =(*intfn).hash(v);   
 
-    while(count < nslots){
-	if(slots[id] && *slots[id] == value){
+    while(slots[id]){
+	if(*slots[id] == value){
             return true;
 	} 
 	id = (id + 1) % nslots; //linear prob 
-	count ++; 
     }
     return false; //not found
 }
