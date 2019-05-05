@@ -10,13 +10,12 @@ BloomFilter::BloomFilter(int k, int m, std::string strfn, std::string intfn){
 	this->k = k; //k = # hashfunctions
 	this->m = m; //m = # bits
 	intfns = new IntegerHash*[k]; 
-//	cout<<"Int hash is: "+ intfn<<endl;
-//	cout << "String hash is" + strfn <<endl; 
+
 	bits = new uint64_t[(int)m/4 + 3]; //how to determine the size of bit array;
 	if(strfn == "jenkins"){
-		this->strfn = new JenkinsHash(); //wrong
+		this->strfn = new JenkinsHash();
 	}else if(strfn == "pearson"){
-		this->strfn = new PearsonHash(); //wrong
+		this->strfn = new PearsonHash(); 
 	}
 	
 	if(intfn == "division"){
@@ -52,14 +51,10 @@ bool BloomFilter::lookup(const std::string& value) const{
 		uint64_t id = (*intfns[i]).hash(v);
 		uint64_t temp = (uint64_t)bits[id/4] & ((uint64_t)1 << (id % 4)); 
 		if(temp != ((uint64_t)1 << (id % 4))){
-//			if(temp != ((uint64_t)1 << (id %4)))
-//				cout<<"false"<<endl;
-//			cout<<(uint64_t)(1 << (id % 4)) <<endl;
-//			cout<< bits[id/4] <<endl;  
+			if(temp != ((uint64_t)1 << (id %4)))  
 			return false;
 		} 
 	}
-//	cout << "true" << endl; 
 	return true; 
 }
 
