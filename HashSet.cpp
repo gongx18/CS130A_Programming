@@ -6,7 +6,7 @@
 using namespace std;
 HashSet::HashSet(){
     nitems = 0;
-    nslots = 10; 
+    nslots = 1000; 
     strfn = new PearsonHash(); 
     intfn = new ReciprocalHash(1, nslots);
     slots = new string*[nslots];
@@ -29,7 +29,7 @@ void HashSet::rehash(){
     }
     slots = newslots; //free pointer 
     nslots *= 2;
-    //cout<<nslots<<endl;  
+    cout<<nslots<<endl;  
     //delete newslots; //?? 
 }
 
