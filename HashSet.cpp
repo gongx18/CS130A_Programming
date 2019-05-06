@@ -6,7 +6,7 @@
 using namespace std;
 HashSet::HashSet(){
     nitems = 0;
-    nslots = 100; 
+    nslots = 1000; 
     strfn = new PearsonHash(); 
     intfn = new ReciprocalHash(1, nslots);
     slots = new string*[nslots];
