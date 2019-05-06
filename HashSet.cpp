@@ -61,6 +61,9 @@ bool HashSet::lookup(const std::string& value)const{
 
 HashSet::~HashSet(){
     delete strfn; 
-    delete intfn; 
+    delete intfn;
+    for(int i = 0; i < nslots; i++){
+	delete slots[i]; 
+    } 
     delete[] slots; 
 }
