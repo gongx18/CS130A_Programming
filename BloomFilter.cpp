@@ -50,7 +50,7 @@ void BloomFilter::insert(const std::string& value){
 
 bool BloomFilter::lookup(const std::string& value) const{
  	for(int i = 0; i < k; i++){
-		uint64_t v= (*strfn).hash(value); 
+		int v= (*strfn).hash(value); 
 		uint64_t id = (*intfns[i]).hash(v);
 		uint64_t temp = (uint64_t)bits[id/64] & (uint64_t(1) << (id % 64)); 
 		if(temp != (uint64_t(1) << (id % 64))){  
