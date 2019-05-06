@@ -10,7 +10,7 @@ BloomFilter::BloomFilter(int k, int m, std::string strfn, std::string intfn){
 	this->k = k; //k = # hashfunctions
 	this->m = m; //m = # bits
 	intfns = new IntegerHash*[k]; 
-	cout << this->m << endl; 
+//	cout << this->m << endl; 
 //	bits = new uint64_t[(int)m/4 + 3]; //how to determine the size of bit array to create?
         bits = new uint64_t[m](); 
 	if(strfn == "jenkins"){
@@ -50,7 +50,7 @@ void BloomFilter::insert(const std::string& value){
 
 bool BloomFilter::lookup(const std::string& value) const{
  	for(int i = 0; i < k; i++){
-		int v= (*strfn).hash(value); 
+		uint64_t v= (*strfn).hash(value); 
 		uint64_t id = (*intfns[i]).hash(v);
 		uint64_t temp = (uint64_t)bits[id/64] & (uint64_t(1) << (id % 64)); 
 		if(temp != (uint64_t(1) << (id % 64))){  

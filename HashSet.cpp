@@ -16,7 +16,7 @@ void HashSet::rehash(){
     string** newslots = new string*[2*nslots]();
     for(int i = 0; i < nslots; i++){
         if(slots[i] != NULL){
-	    cout << "entered"<<endl; //print
+//	    cout << "entered"<<endl; //print
             int v = (*strfn).hash(*slots[i]);
 	    string value = *slots[i];  
             int id = (*intfn).hash(v);
@@ -29,7 +29,7 @@ void HashSet::rehash(){
     }
     slots = newslots; //free pointer 
     nslots *= 2;
-    cout<<nslots<<endl;  
+//    cout<<nslots<<endl;  
     //delete newslots; //?? 
 }
 
