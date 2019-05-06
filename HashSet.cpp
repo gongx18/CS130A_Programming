@@ -9,11 +9,11 @@ HashSet::HashSet(){
     nslots = 1000; 
     strfn = new PearsonHash(); 
     intfn = new ReciprocalHash(1, nslots);
-    slots = new string*[nslots];
+    slots = new string*[nslots]();
 }
 
 void HashSet::rehash(){
-    string** newslots = new string*[2*nslots];
+    string** newslots = new string*[2*nslots]();
     for(int i = 0; i < nslots; i++){
         if(slots[i] != NULL){
 	    cout << "entered"<<endl; //print

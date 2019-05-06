@@ -10,9 +10,9 @@ BloomFilter::BloomFilter(int k, int m, std::string strfn, std::string intfn){
 	this->k = k; //k = # hashfunctions
 	this->m = m; //m = # bits
 	intfns = new IntegerHash*[k]; 
-
+	cout << this->m << endl; 
 //	bits = new uint64_t[(int)m/4 + 3]; //how to determine the size of bit array to create?
-        bits = new uint64_t[m*m](); 
+        bits = new uint64_t[m](); 
 	if(strfn == "jenkins"){
 		this->strfn = new JenkinsHash();
 	}else if(strfn == "pearson"){
@@ -67,7 +67,7 @@ BloomFilter::~BloomFilter(){
 	}
 	delete[] intfns; 
 	delete strfn; 	
-	delete bits; 
+	delete[] bits; 
 }
 
 
