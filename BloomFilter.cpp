@@ -12,7 +12,7 @@ BloomFilter::BloomFilter(int k, int m, std::string strfn, std::string intfn){
 	intfns = new IntegerHash*[k]; 
 
 //	bits = new uint64_t[(int)m/4 + 3]; //how to determine the size of bit array to create?
-        bits = new uint64_t[m](); 
+        bits = new uint64_t[3*m](); 
 	if(strfn == "jenkins"){
 		this->strfn = new JenkinsHash();
 	}else if(strfn == "pearson"){
