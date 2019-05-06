@@ -42,18 +42,18 @@ BloomFilter::BloomFilter(int k, int m, std::string strfn, std::string intfn){
 
 void BloomFilter::insert(const std::string& value){
 	for(int i = 0; i < k; i++){
-		int v = (*strfn).hash(value);
-		int id = (*intfns[i]).hash(v); 
+		uint64_t v = (*strfn).hash(value);
+		uint64_t id = (*intfns[i]).hash(v); 
 		bits[id/64] |= (uint64_t(1) << (id % 64)); 
 	}
 }
 
 bool BloomFilter::lookup(const std::string& value) const{
  	for(int i = 0; i < k; i++){
-		int v= (*strfn).hash(value); 
-		int id = (*intfns[i]).hash(v);
-		uint64_t temp = (uint64_t)bits[id/64] & (uint64_t(1) << (id % 64)); 
-		if(temp != (uint64_t(1) << (id % 64))){  
+		uint64_t v= (*strfn).hash(value); 
+		uint64_t id = (*intfns[i]).hash(v);
+		uint64_t temp = bits[id/64] & (uint64_t(1) << (id % 64)); 
+		if(temp == 0){  
 			return false;
 		} 
 	}
