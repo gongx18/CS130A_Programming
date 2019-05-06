@@ -29,7 +29,7 @@ void HashSet::rehash(){
     }
     slots = newslots; //free pointer 
     nslots *= 2;
-    cout<<nslots<<endl;  
+    //cout<<nslots<<endl;  
     //delete newslots; //?? 
 }
 

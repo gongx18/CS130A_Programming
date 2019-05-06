@@ -11,7 +11,11 @@ BloomFilter::BloomFilter(int k, int m, std::string strfn, std::string intfn){
 	this->m = m; //m = # bits
 	intfns = new IntegerHash*[k]; 
 
-	bits = new uint64_t[(int)m/4 + 3]; //how to determine the size of bit array;
+//	bits = new uint64_t[(int)m/4 + 3]; //how to determine the size of bit array to create?
+        bits = new uint64_t[m]();
+	for(int i = 0; i < m; i++){
+		bits[i] = 0;
+	} 
 	if(strfn == "jenkins"){
 		this->strfn = new JenkinsHash();
 	}else if(strfn == "pearson"){
@@ -41,7 +45,7 @@ void BloomFilter::insert(const std::string& value){
 	for(int i = 0; i < k; i++){
 		int v = (*strfn).hash(value);
 		int id = (*intfns[i]).hash(v); 
-		bits[id/4] |= ((uint64_t)1 << (id % 4)); 
+		bits[id/64] |= (uint64_t(1) << (id % 64)); 
 	}
 }
 
@@ -49,8 +53,8 @@ bool BloomFilter::lookup(const std::string& value) const{
  	for(int i = 0; i < k; i++){
 		int v= (*strfn).hash(value); 
 		uint64_t id = (*intfns[i]).hash(v);
-		uint64_t temp = (uint64_t)bits[id/4] & ((uint64_t)1 << (id % 4)); 
-		if(temp != ((uint64_t)1 << (id % 4))){  
+		uint64_t temp = (uint64_t)bits[id/64] & (uint64_t(1) << (id % 64)); 
+		if(temp != (uint64_t(1) << (id % 64))){  
 			return false;
 		} 
 	}
