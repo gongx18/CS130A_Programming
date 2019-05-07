@@ -5,9 +5,9 @@ DIR=whatever
 mkdir "$DIR"
 
 # Defaults:
-m=30000
-n=3000
-k=10
+m=100000
+n=10000
+k=1
 
 # Do stuff:
 for k in {1..100}; do
