@@ -5,7 +5,7 @@ DIR=whatever
 mkdir "$DIR"
 
 # Defaults:
-m=100000
+m=30000
 n=3000
 k=10
 
