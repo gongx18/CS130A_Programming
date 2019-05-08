@@ -5,12 +5,12 @@ DIR=whatever
 mkdir "$DIR"
 
 # Defaults:
-m=100000
-n=9000
-k=1
+m=10
+n=10
+k=10
 
 # Do stuff:
-for k in {1..100}; do
+for m in {1..100}; do
   echo "Running with m=$m; n=$n; k=$k..."
   echo "$m" >> "$DIR/m.tsv"
   echo "$n" >> "$DIR/n.tsv"
